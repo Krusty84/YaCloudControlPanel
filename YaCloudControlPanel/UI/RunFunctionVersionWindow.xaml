@@ -1,0 +1,117 @@
+﻿<Window
+    x:Class="YaCloudControlPanel.RunFunctionVersionWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:YaCloudControlPanel"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:notification="clr-namespace:RbCreation.Wpf.ProgressNotifier;assembly=RbCreation.Wpf.ProgressNotifier"
+    xmlns:vsixshell="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0"
+    Title="Run cloud function"
+    Width="800"
+    Height="363"
+    Background="{DynamicResource {x:Static vsixshell:EnvironmentColors.ScrollBarBorderBrushKey}}"
+    Icon="/YaCloudControlPanel;component/Resources/MainIcon.png"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    Topmost="True"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="styles_ui.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <avalonEdit:TextEditor
+            xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+            x:Name="textEditorResponse"
+            Margin="400,24,18,54"
+            FontFamily="Consolas"
+            FontSize="10pt"
+            IsReadOnly="True"
+            ShowLineNumbers="True"
+            SyntaxHighlighting="Json"
+            WordWrap="True">
+            <avalonEdit:TextEditor.Options>
+                <avalonEdit:TextEditorOptions
+                    InheritWordWrapIndentation="true"
+                    ShowSpaces="True"
+                    WordWrapIndentation="4" />
+            </avalonEdit:TextEditor.Options>
+        </avalonEdit:TextEditor>
+        <Button
+            x:Name="buttonSendRequest"
+            Width="33"
+            Margin="27,290,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonSendRequest_Click">
+            <DockPanel>
+                <Image Width="12" Source="/YaCloudControlPanel;component/Resources/Send.png" />
+            </DockPanel>
+            <Button.ToolTip>
+                <ToolTip>
+                    Send a request to the cloud function
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button
+            x:Name="buttonCopyCSharpClass"
+            Width="33"
+            Margin="735,290,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonCopyCSharpClass_Click">
+            <DockPanel>
+                <Image Width="12" Source="/YaCloudControlPanel;component/Resources/ClassShortcut.png" />
+            </DockPanel>
+            <Button.ToolTip>
+                <ToolTip>
+                    Convert the response to a C# Class and copy it to in the clipboard
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <avalonedit:TextEditor
+            x:Name="textEditorRequest"
+            Margin="10,24,411,54"
+            FontFamily="Consolas"
+            FontSize="10pt"
+            ShowLineNumbers="True"
+            SyntaxHighlighting="Json"
+            Text="{}{}"
+            WordWrap="True">
+            <avalonedit:TextEditor.Options>
+                <avalonedit:TextEditorOptions
+                    InheritWordWrapIndentation="true"
+                    ShowSpaces="True"
+                    WordWrapIndentation="4" />
+            </avalonedit:TextEditor.Options>
+        </avalonedit:TextEditor>
+        <StackPanel x:Name="busyPanel">
+            <StackPanel.Background>
+                <SolidColorBrush Opacity="0.83" Color="White" />
+            </StackPanel.Background>
+            <notification:ProgressNotifier
+                x:Name="busyProgress"
+                Width="374"
+                Height="65"
+                Margin="0,160,0,0"
+                HorizontalAlignment="Stretch"
+                FontFamily="Arial"
+                FontSize="14"
+                Foreground="Black"
+                IntervalNotifier="1"
+                IsBusy="True"
+                SpinnerHeight="40"
+                SpinnerWidth="40">
+                <notification:ProgressNotifier.ProgressTextSource>
+                    <System:String>Asking...</System:String>
+                </notification:ProgressNotifier.ProgressTextSource>
+            </notification:ProgressNotifier>
+        </StackPanel>
+    </Grid>
+</Window>

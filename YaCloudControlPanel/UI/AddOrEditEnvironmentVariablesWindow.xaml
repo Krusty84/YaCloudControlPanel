@@ -1,0 +1,102 @@
+﻿<Window
+    x:Class="YaCloudControlPanel.AddOrEditEnvironmentVariablesWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:YaCloudControlPanel"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vsixshell="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0"
+    Title="Add environment variable"
+    Width="421"
+    Height="150"
+    Background="{DynamicResource {x:Static vsixshell:EnvironmentColors.ScrollBarBorderBrushKey}}"
+    Icon="/YaCloudControlPanel;component/Resources/MainIcon.png"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    Topmost="True"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="styles_ui.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid Margin="15,15,15,30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="25" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Name="label1"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,0,200,0"
+                FontSize="12">
+                Name
+            </Label>
+            <TextBox
+                Name="textBoxEnvName"
+                Grid.Row="0"
+                Grid.Column="1"
+                MinWidth="250"
+                Margin="57,0,0,0"
+                KeyDown="TextBoxEnvName_KeyDown"
+                KeyUp="TextBoxEnvName_KeyUp" />
+            <Label
+                Name="label2"
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="0,0,200,0"
+                FontSize="12">
+                Value
+            </Label>
+            <TextBox
+                Name="textBoxEnvValue"
+                Grid.Row="2"
+                Grid.Column="1"
+                MinWidth="250"
+                Margin="57,0,0,0" />
+        </Grid>
+        <WrapPanel Margin="0,84,5,5" HorizontalAlignment="Right">
+            <Button
+                x:Name="buttonOk"
+                MinWidth="60"
+                Margin="0,0,10,0"
+                Click="ButtonOk_Click">
+                Ok
+                <!-- <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=textBoxEnvName}" Value="">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Text, ElementName=textBoxEnvValue}" Value="">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>-->
+                <Button.ToolTip>
+                    <ToolTip>
+                        Add the environment variable
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <Button
+                x:Name="buttonCancel"
+                MinWidth="60"
+                Click="ButtonCancel_Click">
+                Cancel
+            </Button>
+        </WrapPanel>
+    </Grid>
+</Window>

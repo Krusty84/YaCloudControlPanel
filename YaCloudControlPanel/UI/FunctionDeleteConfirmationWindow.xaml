@@ -1,0 +1,87 @@
+﻿<Window
+    x:Class="YaCloudControlPanel.FunctionDeleteConfirmationWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:YaCloudControlPanel"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:notification="clr-namespace:RbCreation.Wpf.ProgressNotifier;assembly=RbCreation.Wpf.ProgressNotifier"
+    xmlns:vsixshell="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0"
+    Title="Function deletion confirmation"
+    Width="375"
+    Height="113"
+    Background="{DynamicResource {x:Static vsixshell:EnvironmentColors.ScrollBarBorderBrushKey}}"
+    Icon="/YaCloudControlPanel;component/Resources/MainIcon.png"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    Topmost="True"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="styles_ui.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <TextBox
+            x:Name="textBoxConfirmationWord"
+            Width="224"
+            Height="21"
+            Margin="10,40,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            KeyUp="TextBoxConfirmationWord_KeyUp"
+            TextWrapping="Wrap" />
+        <Button
+            x:Name="buttonConfirmDelete"
+            Width="76"
+            Height="21"
+            Margin="277,40,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonConfirmDelete_Click"
+            Content="Confirm">
+            <Button.ToolTip>
+                <ToolTip>
+                    Confirm the removal of the function from the cloud
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Label
+            x:Name="label"
+            Width="224"
+            Height="25"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Type 'delete' to confirm delete action"
+            IsEnabled="False" />
+        <StackPanel x:Name="busyPanel">
+            <StackPanel.Background>
+                <SolidColorBrush Opacity="0.83" Color="White" />
+            </StackPanel.Background>
+            <notification:ProgressNotifier
+                x:Name="busyProgress"
+                Width="374"
+                Height="65"
+                Margin="0,2,0,0"
+                HorizontalAlignment="Stretch"
+                FontFamily="Arial"
+                FontSize="14"
+                Foreground="Black"
+                IntervalNotifier="1"
+                IsBusy="True"
+                SpinnerHeight="40"
+                SpinnerWidth="40">
+                <notification:ProgressNotifier.ProgressTextSource>
+                    <System:String>Do...</System:String>
+                    <System:String>Something Do...</System:String>
+                    <System:String>Again...</System:String>
+                    <System:String>And again...</System:String>
+                </notification:ProgressNotifier.ProgressTextSource>
+            </notification:ProgressNotifier>
+        </StackPanel>
+    </Grid>
+</Window>

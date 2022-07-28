@@ -1,0 +1,68 @@
+﻿<Window
+    x:Class="YaCloudControlPanel.VMInfromationWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:YaCloudControlPanel"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vsixshell="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0"
+    Title="VMInfromationWindow"
+    Width="800"
+    Height="450"
+    Background="{DynamicResource {x:Static vsixshell:EnvironmentColors.ScrollBarBorderBrushKey}}"
+    Icon="/YaCloudControlPanel;component/Resources/MainIcon.png"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    Topmost="True"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="styles_ui.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <DataGrid
+            x:Name="dataGridVMInfo"
+            Background="White"
+            GridLinesVisibility="All"
+            SelectionMode="Single"
+            SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Binding="{Binding name}"
+                    Header="Name"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding status}"
+                    Header="Status"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding platformId}"
+                    Header="Platform"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding resources.cores}"
+                    Header="vCPU"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding resources.coreFraction}"
+                    Header="vCPU Perfomance"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding resources.memory}"
+                    Header="Memory"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding zoneId}"
+                    Header="Availiability Zone"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding networkInterfaces[0].primaryV4Address.oneToOneNat.address}"
+                    Header="Public IP"
+                    IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
